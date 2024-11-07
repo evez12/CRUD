@@ -4,6 +4,7 @@ import com.huseynov.crud.entity.Employee;
 
 import java.util.List;
 
+@Deprecated
 public interface EmployeeDAO {
 
     List<Employee> findAll();

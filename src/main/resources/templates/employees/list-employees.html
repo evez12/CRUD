@@ -17,12 +17,13 @@
     <br>
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Email</th>
-            </tr>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Operating</th>
+        </tr>
         </thead>
         <tbody>
         <tr th:each="employee: ${myEmployees}">
@@ -30,6 +31,13 @@
             <td th:text="${employee.name}"></td>
             <td th:text="${employee.surname}"></td>
             <td th:text="${employee.email}"></td>
+            <td>
+                <a th:href="@{/employees/update(employeeId=${employee.id})}"
+                   class="btn btn-primary">
+                    Update
+                </a>
+
+            </td>
         </tr>
         </tbody>
     </table>

@@ -4,10 +4,7 @@ import com.huseynov.crud.entity.Employee;
 import com.huseynov.crud.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,14 +19,9 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/menu")
-    public String getMenuPage(Model model) {
-        return "menu";
-    }
-
     @GetMapping("/list")
     public String listEmployees(Model theModel) {
-        List<Employee> employees = employeeService.findAll();
+        List<Employee> employees = employeeService.findAllByOrderByNameAsc();
         theModel.addAttribute("myEmployees", employees);
         return "employees/list-employees";
     }
@@ -45,6 +37,19 @@ public class EmployeeController {
         employeeService.save(theEmployee);
         return "redirect:/employees/list";
     }
+
+    @GetMapping("/update")
+    public String updateEmployeeForm(@RequestParam("employeeId") int id, Model model) {
+        model.addAttribute("employee", employeeService.findById(id));
+        return "employees/update-form";
+    }
+
+    @PostMapping("/update")
+    public String updateEmployee(@ModelAttribute("employee") Employee updateEmployee) {
+        employeeService.update(updateEmployee);
+        return "redirect:/employees/list";
+    }
+
 
 
 }

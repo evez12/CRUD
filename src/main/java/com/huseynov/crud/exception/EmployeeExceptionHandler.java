@@ -17,6 +17,8 @@ public class EmployeeExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+
+
     @ExceptionHandler
     public ResponseEntity<EmployeeError> employeeExceptionHandler(Exception exc) {
         EmployeeError error = new EmployeeError();
