@@ -29,7 +29,13 @@ public class EmployeeController {
     @GetMapping("/add")
     public String addEmployee(Model theModel) {
         theModel.addAttribute("myEmployee", new Employee());
-        return "employees/add-employee-form";
+        return "employees/employee-form";
+    }
+
+    @GetMapping("/update")
+    public String updateEmployeeForm(@RequestParam("employeeId") int id, Model model) {
+        model.addAttribute("myEmployee", employeeService.findById(id));
+        return "employees/employee-form";
     }
 
     @PostMapping("/save")
@@ -37,19 +43,5 @@ public class EmployeeController {
         employeeService.save(theEmployee);
         return "redirect:/employees/list";
     }
-
-    @GetMapping("/update")
-    public String updateEmployeeForm(@RequestParam("employeeId") int id, Model model) {
-        model.addAttribute("employee", employeeService.findById(id));
-        return "employees/update-form";
-    }
-
-    @PostMapping("/update")
-    public String updateEmployee(@ModelAttribute("employee") Employee updateEmployee) {
-        employeeService.update(updateEmployee);
-        return "redirect:/employees/list";
-    }
-
-
 
 }

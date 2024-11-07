@@ -4,7 +4,6 @@ import com.huseynov.crud.dao.EmployeeRepository;
 import com.huseynov.crud.entity.Employee;
 import com.huseynov.crud.exception.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,38 +32,20 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employee == null) {
             throw new EmployeeNotFoundException("Employee not found id: " + id);
         }
-
         return employee;
     }
 
-    @Transactional // reason: we shall change in the database
     @Override
-    public Employee save(Employee employee) {
-        employee.setId(0); // create new employee
-
-        if (employee.getName() == null || employee.getName().trim().isEmpty() ||
+    public void save(Employee employee) {
+        if (    employee.getName() == null || employee.getName().trim().isEmpty() ||
                 employee.getSurname() == null || employee.getSurname().trim().isEmpty() ||
                 employee.getEmail() == null || employee.getEmail().trim().isEmpty()) {
             throw new RuntimeException("Employee name,surname or email is null or empty");
         }
 
-        return employeeRepository.save(employee);
+        employeeRepository.save(employee);
     }
 
-    @Transactional
-    @Override
-    public Employee update(Employee employee) {
-
-        if (employee.getName() == null || employee.getName().trim().isEmpty() ||
-                employee.getSurname() == null || employee.getSurname().trim().isEmpty() ||
-                employee.getEmail() == null || employee.getEmail().trim().isEmpty()) {
-            throw new RuntimeException("Employee name,surname or email is null or empty");
-        } else {
-            return employeeRepository.save(employee);
-        }
-    }
-
-    @Transactional
     @Override
     public void deleteById(int id) {
         Employee employee = employeeRepository.findById(id).orElse(null);

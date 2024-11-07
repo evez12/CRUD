@@ -19,16 +19,15 @@
                   method="post">
 
                 <div class="mb-3">
+                    <input type="hidden" th:field="*{id}">
+                </div>
+                <div class="mb-3">
                     <input type="text" th:field="*{name}" placeholder="Name" required="required" class="form-control">
-<!--                    <span th:f="${#fields.hasErrors('name')}"-->
-<!--                          th:errors="*{name}"-->
-<!--                          class="error">-->
-
-<!--                    </span>-->
                 </div>
 
                 <div class="mb-3">
-                    <input type="text" th:field="*{surname}" placeholder="Surname" required="required" class="form-control">
+                    <input type="text" th:field="*{surname}" placeholder="Surname" required="required"
+                           class="form-control">
                 </div>
 
                 <div class="mb-3">
