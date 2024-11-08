@@ -2,7 +2,6 @@ package com.huseynov.crud.controller;
 
 import com.huseynov.crud.entity.Employee;
 import com.huseynov.crud.service.EmployeeService;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +58,8 @@ public class EmployeeController {
     }
 
     // version 2: employee delete
-    @GetMapping("/delete")public String deleteEmployee(@RequestParam("employeeId") int id){
+    @GetMapping("/delete")
+    public String deleteEmployee(@RequestParam("employeeId") int id) {
         employeeService.deleteById(id);
         return "redirect:/employees/list";
     }
