@@ -12,7 +12,7 @@
 <div class="container">
     <h3>Employee Directory</h3>
     <hr>
-    <a th:href="@{/employees/add}" class="btn btn-primary">Add Employee</a>
+    <a th:href="@{/tempEmployees/add}" class="btn btn-primary">Add Employee</a>
     <br>
     <br>
     <table class="table table-bordered table-striped">
@@ -26,18 +26,29 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="employee: ${myEmployees}">
-            <td th:text="${employee.id}"></td>
-            <td th:text="${employee.name}"></td>
-            <td th:text="${employee.surname}"></td>
-            <td th:text="${employee.email}"></td>
+        <tr th:each="tempEmployee: ${myEmployees}">
+            <td th:text="${tempEmployee.id}"></td>
+            <td th:text="${tempEmployee.name}"></td>
+            <td th:text="${tempEmployee.surname}"></td>
+            <td th:text="${tempEmployee.email}"></td>
             <td>
-                <a th:href="@{/employees/update(employeeId=${employee.id})}"
-                   class="btn btn-primary">
-                    Update
-                </a>
+                <form action="#" th:action="@{/employees/update}" method="post" class="d-inline">
+                    <input type="hidden" name="employeeId" th:value="${tempEmployee.id}">
+                    <button type="submit" class="btn btn-info btn-sm">Update</button>
+                </form>
+<!--                version 1: employee delete-->
+<!--                <form action="#" th:action="@{/employees/delete-form}" method="post" class="d-inline">-->
+<!--                    <input type="hidden" name="employeeId" th:value="${tempEmployee.id}">-->
+<!--                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>-->
+<!--                </form>-->
+                <!--                version two: employee delete-->
+                <a th:href="@{/employees/delete(employeeId = ${tempEmployee.id})} "
+                   onclick="if (!(confirm ('Are you sure you want to delete this employee?'))) return false;">
 
+                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                </a>
             </td>
+
         </tr>
         </tbody>
     </table>
