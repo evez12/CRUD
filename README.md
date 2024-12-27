@@ -89,18 +89,3 @@ If you would like to contribute to this project, follow these steps:
 4. Push your changes to your fork.
 5. Create a pull request.
 
----
-
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
----
-
-## Contact
-
-For any questions or issues, feel free to contact the repository owner at:
-
-- **Name:** Əvəz
-- **GitHub:** [evez12](https://github.com/evez12)
-
